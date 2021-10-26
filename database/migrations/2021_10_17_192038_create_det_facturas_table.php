@@ -15,12 +15,11 @@ class CreateDetFacturasTable extends Migration
     {
         Schema::create('det_facturas', function (Blueprint $table) {
             $table->id();
-            $table->integer('precio',150);
-            $table->integer('cant',150);
-            $table->integer('total',150);
+            $table->integer('precio');
+            $table->integer('cant');
+            $table->integer('total');
             $table->foreignId('id_fact')->constrained('facturas');
             $table->foreignId('id_prod')->constrained('productos');
-            $table->timestamps();
             $table->timestamps();
         });
     }
