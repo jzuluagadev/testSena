@@ -12,7 +12,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+use App\Http\Controllers\CategoriasController;
 
 Route::get('/', function () {
     return view('welcome');
 });
+Route::post('/app/categoria/registrar', [UserController::class, 'store']);
