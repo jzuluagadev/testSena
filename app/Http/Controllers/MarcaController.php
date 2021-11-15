@@ -7,28 +7,39 @@ use Illuminate\Http\Request;
 class MarcaController extends Controller
 {
     //
-    public function index (){
-        $marca=Marca::all() -> orderBy ('nombre', 'asc');
-    }
-    public function store (Request $request){
-        $marca = new Marca();
-        $marca ->nombre= $request-> nombre;
-        $marca ->estado= $request-> edo;
+    public function index(){
+        $marca=Marca::all();
+        return ['marca'=>$marca];
 
-        $categoria -> save();
     }
 
-    public function update(Request $request)
-    {
+    public function store(Request $request){
+        $marca= new Marca();
+        $marca-> nombre=$request->nombre;
+        $marca-> estado=$request->edo;
 
-    $marca = Marca::findOrFail($request -> $id);
-    $marca->nombre= $request-> nombre;
-    $marca ->estado= $request-> edo;
-    
-    $marca -> save();
+        $marca->save();
+        
+    }
+    public function update(Request $request){
+        $marca=  Marca::findOrFail($request->id);
+        $marca-> nombre=$request->nombre;
+        $marca-> estado=$request->edo;
+
+        $marca->save();
+        
     }
     public function destroy(Request $request){
-    $marca = Marca::findOrFail($request -> $id);
-    $marca -> delete();
+        $marca= Marca::findOrFail($request->id);
+        $marca-> delete();
     }
+
+    public function getMarca(Request $request){
+        $edo = $request->edo;
+        
+        $marca= Marca::select('id','nombre')
+        ->where('estado',$edo)->get();
+        return ['marca'=>$marca];
+    }
+
 }

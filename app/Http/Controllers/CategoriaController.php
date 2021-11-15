@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 use App\Models\Categorias;
 
 use Illuminate\Http\Request;
+use inertia\inertia;
 
 class CategoriaControllers extends Controller
 {
     //
     public function index (){
-        $categoria=Categoria::all() -> orderBy ('nombre', 'asc');
+        $categoria=Categoria::all();
+        return inertia::render('Categoria',['categoria'=>$categoria]);
     }
     public function store (Request $request){
         $categoria = new Categoria();
@@ -19,8 +21,8 @@ class CategoriaControllers extends Controller
         $categoria -> save();
     }
 
-    public function update(Request $request)
-    {
+    public function update(Request $request){
+    
 
     $categoria = Categoria::findOrFail($request -> $id);
     $categoria ->nombre= $request-> nombre;
@@ -32,6 +34,16 @@ class CategoriaControllers extends Controller
     $categoria = Categoria::findOrFail($request -> $id);
     $categoria -> delete();
     }
+    public function getCategoria(Request $request){
+        $edo = $request->edo;
+        
+        $categoria= Categoria::select('id','nombre')
+        ->where('estado',$edo)->get();
+        return [
+            'categ'=>$categoria
+        ];
+    }
+
 }
 
 
