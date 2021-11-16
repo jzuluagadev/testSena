@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Categorias;
 
 use Illuminate\Http\Request;
-use inertia\inertia;
+use Inertia\Inertia;
 
 class CategoriaControllers extends Controller
 {
