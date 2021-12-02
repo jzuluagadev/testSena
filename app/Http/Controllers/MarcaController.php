@@ -1,13 +1,21 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Marca;
 
 use Illuminate\Http\Request;
+use inertia\inertia;
 
 class MarcaController extends Controller
 {
     //
     public function index(){
+        $marca=Marca::all();
+        return inertia::render('Marcas',['marca'=>$marca]);
+        // return ['marca'=>$marca];
+
+    }
+    public function indexData(){
         $marca=Marca::all();
         return ['marca'=>$marca];
 
@@ -41,5 +49,6 @@ class MarcaController extends Controller
         ->where('estado',$edo)->get();
         return ['marca'=>$marca];
     }
+
 
 }
